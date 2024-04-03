@@ -32,12 +32,12 @@
             id: 'playlistURL'
         }));
 
-
-        // Remove disabled attribute from element with name "custom-playlist"
-        $('input[name="custom-playlist"]').removeAttr('disabled').attr('id', 'playlistURL');
-
         // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
         $('.btn.btn-primary.align-self-start.custom-save').removeAttr('disabled').attr('id', 'playlistUpdate');
+
+        // Fix the strange visual choices
+        $('.offcanvas-content').removeClass();
+
     });
     $(document).ready(function() {
         $("#playlistUpdate").click(function(){
