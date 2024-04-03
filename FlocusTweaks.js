@@ -74,8 +74,6 @@
         // Remove ads for plus
         $('plus-badge').remove()
         $('.upgrade-button').remove()
-    });
-    $(document).ready(function() {
         $('#playlistUpdate').click(function(){
             var inputValue = $('#playlistURL').val();
             var id = getPlaylistID(inputValue);
