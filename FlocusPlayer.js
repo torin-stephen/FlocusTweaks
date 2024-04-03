@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Player
 // @namespace    http://tampermonkey.net/
-// @version      2024-02-16
+// @version      2024-04-03
 // @description  Allows you to change the playlist on flocus from spotify. Check "sounds" tab for input area.
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @author       TKMSMC
@@ -19,20 +19,26 @@
         return id;
     }
 
-    // Replace existing input box with new one
-    $('input[name="custom-playlist"]').replaceWith($('<input>').attr({
-        type: 'text',
-        placeholder: 'Paste playlist or video URL here',
-        class: 'form-control mb-3',
-        id: 'playlistURL'
-    }));
+    $(window).load(function(){
 
-    // Remove disabled attribute from element with name "custom-playlist"
-    $('input[name="custom-playlist"]').removeAttr('disabled').attr('id', 'playlistURL');
+        // Replace logo with better one
+        $('.logo').attr('src', 'https://raw.githubusercontent.com/torin-stephen/FlocusPlayer/main/logo.png');
 
-    // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
-    $('.btn.btn-primary.align-self-start.custom-save').removeAttr('disabled').attr('id', 'playlistUpdate');
+        // Replace existing input box with new one
+        $('input[name="custom-playlist"]').replaceWith($('<input>').attr({
+            type: 'text',
+            placeholder: 'Paste playlist or video URL here',
+            class: 'form-control mb-3',
+            id: 'playlistURL'
+        }));
 
+
+        // Remove disabled attribute from element with name "custom-playlist"
+        $('input[name="custom-playlist"]').removeAttr('disabled').attr('id', 'playlistURL');
+
+        // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
+        $('.btn.btn-primary.align-self-start.custom-save').removeAttr('disabled').attr('id', 'playlistUpdate');
+    });
     $(document).ready(function() {
         $("#playlistUpdate").click(function(){
             var inputValue = $('#playlistURL').val();
