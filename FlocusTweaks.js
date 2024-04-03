@@ -5,6 +5,7 @@
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusPlayer/main/toast/toast.js
+// @require      https://kit.fontawesome.com/f2cd1a0920.js
 // @resource     REMOTE_CSS https://raw.githubusercontent.com/torin-stephen/FlocusPlayer/main/toast/toast.css
 // @author       TKMSMC
 // @match        https://app.flocus.com/
@@ -52,10 +53,10 @@
 
         // Run toast to show loaded
         toasts.push({
-            title: 'Flocus Pro Loaded',
-            content: 'Flocus Pro by TKMSMC',
+            title: 'Flocus Tweaks Loaded',
+            content: 'Flocus Tweaks by TKMSMC',
             style: 'dark',
-            dismissAfter: '1.5s'
+            dismissAfter: '2.5s'
         });
 
         ////////////////////////////////
@@ -102,7 +103,9 @@
         // SETTINGS TAB
         ////////////////////////////////
 
-        $('#settModal-support-tab').html('<i class="fa-solid fa-bolt" style="color: #ffffff;"></i>Flocus Pro Settings');
-
+        // Replace Support Tab with Flocus Tweaks Settings tab
+        $('#settModal-support-tab').html('<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 0C4.032 0 0 4.032 0 9C0 13.968 4.032 18 9 18C13.968 18 18 13.968 18 9C18 4.032 13.968 0 9 0ZM15.714 6.408L13.212 7.443C12.753 6.219 11.79 5.247 10.557 4.797L11.592 2.295C13.482 3.015 14.985 4.518 15.714 6.408ZM9 11.7C7.506 11.7 6.3 10.494 6.3 9C6.3 7.506 7.506 6.3 9 6.3C10.494 6.3 11.7 7.506 11.7 9C11.7 10.494 10.494 11.7 9 11.7ZM6.417 2.286L7.47 4.788C6.228 5.238 5.247 6.219 4.788 7.461L2.286 6.417C3.015 4.518 4.518 3.015 6.417 2.286ZM2.286 11.583L4.788 10.548C5.247 11.79 6.219 12.762 7.461 13.212L6.408 15.714C4.518 14.985 3.015 13.482 2.286 11.583ZM11.592 15.714L10.557 13.212C11.79 12.753 12.762 11.781 13.212 10.539L15.714 11.592C14.985 13.482 13.482 14.985 11.592 15.714Z" fill="white"></path></svg>  Flocus Tweaks ');
+        $('.container-fluid.support').attr('class', 'container-fluid flocus-tweaks-settings')
+        $('.flocus-tweaks-settings').html('<div class="row"><div class="col-12"><div class="mb-4">Nothing here yet</div></div></div>')
     });
 })();
