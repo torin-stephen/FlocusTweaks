@@ -21,6 +21,10 @@
     'use strict';
     var $ = window.jQuery;
 
+    ////////////////////////////////
+    // TOAST SETTINGS
+    ////////////////////////////////
+
     // Establish Toast settings
     const toasts = new Toasts({
         offsetX: 20, // 20px
@@ -33,7 +37,7 @@
         position: 'top-right' // top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
     });
 
-    // Add toast css to the page
+    // Add toast and fa css to the page
     const toastCss = GM_getResourceText("REMOTE_CSS");
     GM_addStyle(toastCss);
 
@@ -54,8 +58,28 @@
             dismissAfter: '1.5s'
         });
 
+        ////////////////////////////////
+        // VISUAL SETTINGS
+        ////////////////////////////////
+
         // Replace logo with better one
         $('.logo').attr('src', 'https://raw.githubusercontent.com/torin-stephen/FlocusPlayer/main/logo.png');
+
+        // Fix the strange visual choices
+        $('.offcanvas-content').removeClass();
+
+        // Remove ads for plus
+        $('plus-badge').remove()
+        $('.upgrade-button').remove()
+
+        // When the dash is changed, remove ads for plus
+        $('.dash-mode').click(function(){
+            $('div.flocus-free-only').attr('class', 'flocus-plus-only')
+        });
+
+        ////////////////////////////////
+        // MUSIC PLAYER SETTINGS
+        ////////////////////////////////
 
         // Replace existing input box with new one
         $('input[name="custom-playlist"]').replaceWith($('<input>').attr({
@@ -68,21 +92,17 @@
         // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
         $('.btn.btn-primary.align-self-start.custom-save').removeAttr('disabled').attr('id', 'playlistUpdate');
 
-        // Fix the strange visual choices
-        $('.offcanvas-content').removeClass();
-
-        // Remove ads for plus
-        $('plus-badge').remove()
-        $('.upgrade-button').remove()
         $('#playlistUpdate').click(function(){
             var inputValue = $('#playlistURL').val();
             var id = getPlaylistID(inputValue);
             $('.music-player.spotify').attr('src', `https://open.spotify.com/embed/playlist/${id}?theme=0&amp;utm_source=iframe-api`);
         });
 
-        // When the dash is changed, remove ads for plus
-        $('.dash-mode').click(function(){
-            $('div.flocus-free-only').attr('class', 'flocus-plus-only')
-        });
+        ////////////////////////////////
+        // SETTINGS TAB
+        ////////////////////////////////
+
+        $('#settModal-support-tab').html('<i class="fa-solid fa-bolt" style="color: #ffffff;"></i>Flocus Pro Settings');
+
     });
 })();
