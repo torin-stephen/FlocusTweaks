@@ -82,11 +82,25 @@
             prioritiesEmoji();
         });
 
-        // When the priorities are changed, update emoji NOT WORKING
-        $(".ms-0 me-auto btn-close").click(function () {
-            prioritiesEmoji();
-            console.log("priorities click");
+
+
+        // Creating a MutationObserver instance
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                // Checking if the class of the body has changed
+                if ($(mutation.target).hasClass('modal-open')) {
+                    // If class changed to "modal-open", run prioritiesEmoji function
+                    prioritiesEmoji();
+                    console.log("mutated")
+                }
+            });
         });
+
+        // Configuring the MutationObserver to observe changes in attributes of the body element
+        var config = { attributes: true, attributeFilter: ['class'] };
+
+        // Start observing the body element
+        observer.observe(document.body, config);
 
         // Priorities Tab
         // Define the new styles for the tab
