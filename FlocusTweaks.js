@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.5.5
+// @version      1.5.6
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.js
