@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.5.6
+// @version      1.6.2
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.js
@@ -12,6 +12,9 @@
 // @icon         data:image/png;base64,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
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_listValues
 // ==/UserScript==
 
 // Font Jura
@@ -22,6 +25,19 @@
     "use strict";
     var $ = window.jQuery;
     var scriptVersion = GM_info.script.version;
+    const configItems = ['option1', 'option2', 'option3', 'option4'];
+
+    function getConfigOptions() {
+        const storedValues = {};
+        for (let i = 1; i <= 4; i++) {
+            const itemName = "option" + i;
+            const storedValue = GM_getValue(itemName, true); // Default value is true if not found
+            storedValues[itemName] = storedValue;
+        }
+        return storedValues;
+    }
+
+    console.log(getConfigOptions().option1);
 
     ////////////////////////////////
     // TOAST SETTINGS
@@ -63,48 +79,56 @@
         // VISUAL SETTINGS
         ////////////////////////////////
 
-        // Replace logo with better one
-        $(".logo").attr(
-            "src",
-            "https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/logo.png"
-        );
 
+        if (getConfigOptions().option1){
+            // Replace logo with better one
+            $(".logo").attr(
+                "src",
+                "https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/logo.png"
+            );
+        }
         // Fix the strange visual choices
         $(".offcanvas-content").removeClass();
 
-        // Remove ads for plus
-        $("plus-badge").remove();
-        $(".upgrade-button").remove();
-
-        // When the dash is changed, remove ads for plus, add emoji
-        $(".dash-mode").click(function () {
-            $("div.flocus-free-only").attr("class", "flocus-plus-only");
-            prioritiesEmoji();
-        });
-
-
-
-        // Creating a MutationObserver instance
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                // Checking if the class of the body has changed
-                if ($(mutation.target).hasClass('modal-open')) {
-                    // If class changed to "modal-open", run prioritiesEmoji function
-                    prioritiesEmoji();
-                    console.log("mutated")
-                }
+        if (getConfigOptions().option2){
+            // Remove ads for plus
+            $("plus-badge").remove();
+            $(".upgrade-button").remove();
+            $(".dash-mode").click(function () {
+                $("div.flocus-free-only").attr("class", "flocus-plus-only");
             });
-        });
+        }
 
-        // Configuring the MutationObserver to observe changes in attributes of the body element
-        var config = { attributes: true, attributeFilter: ['class'] };
+        if (getConfigOptions().option3){
+            // When the dash is changed, remove ads for plus, add emoji
+            $(".dash-mode").click(function () {
+                $("div.flocus-free-only").attr("class", "flocus-plus-only");
+                prioritiesEmoji();
+            });
 
-        // Start observing the body element
-        observer.observe(document.body, config);
 
-        // Priorities Tab
-        // Define the new styles for the tab
-        const tabStyles = `
+
+            // Creating a MutationObserver instance
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    // Checking if the class of the body has changed
+                    if ($(mutation.target).hasClass('modal-open')) {
+                        // If class changed to "modal-open", run prioritiesEmoji function
+                        prioritiesEmoji();
+                        console.log("mutated")
+                    }
+                });
+            });
+
+            // Configuring the MutationObserver to observe changes in attributes of the body element
+            var config = { attributes: true, attributeFilter: ['class'] };
+
+            // Start observing the body element
+            observer.observe(document.body, config);
+
+            // Priorities Tab
+            // Define the new styles for the tab
+            const tabStyles = `
         flocus-listitem:not(.flocus-is-plus) button {
             display: block !important;
             pointer-events: auto !important; /* Override the existing style */
@@ -128,71 +152,75 @@
         }
     `;
 
-        // Create a new <style> element and append it to the <head> of the document
-        const styleElement = document.createElement("style");
-        styleElement.textContent = tabStyles;
-        document.head.appendChild(styleElement);
+            // Create a new <style> element and append it to the <head> of the document
+            const styleElement = document.createElement("style");
+            styleElement.textContent = tabStyles;
+            document.head.appendChild(styleElement);
 
-        // This finds the emoji from local storage
-        // Get the span element with class "title" within a div with class "task"
+            // This finds the emoji from local storage
+            // Get the span element with class "title" within a div with class "task"
 
-        const prioritiesEmoji = () => {
-            var spanText = $("div.task span.title").text().trim();
+            const prioritiesEmoji = () => {
+                var spanText = $("div.task span.title").text().trim();
 
-            if (spanText) {
-                // Get data from local storage
-                var localStorageData = JSON.parse(
-                    localStorage.getItem("flocus_priorities_settings")
-                );
+                if (spanText) {
+                    // Get data from local storage
+                    var localStorageData = JSON.parse(
+                        localStorage.getItem("flocus_priorities_settings")
+                    );
 
-                // Find the object with the same name as the text of the span
-                var matchingObject = $.grep(localStorageData, function (obj) {
-                    return obj.name === spanText;
-                })[0];
+                    // Find the object with the same name as the text of the span
+                    var matchingObject = $.grep(localStorageData, function (obj) {
+                        return obj.name === spanText;
+                    })[0];
 
-                if (matchingObject) {
-                    // Output the emoji
-                    console.log("Emoji for " + spanText + ": " + matchingObject.emoji);
-                    $("div.task span.emoji").html(matchingObject.emoji);
+                    if (matchingObject) {
+                        // Output the emoji
+                        console.log("Emoji for " + spanText + ": " + matchingObject.emoji);
+                        $("div.task span.emoji").html(matchingObject.emoji);
+                    } else {
+                        console.log("No matching object found for " + spanText);
+                    }
                 } else {
-                    console.log("No matching object found for " + spanText);
+                    console.log(
+                        "No span element with class 'title' found within a div with class 'task'"
+                    );
                 }
-            } else {
-                console.log(
-                    "No span element with class 'title' found within a div with class 'task'"
-                );
-            }
-        };
+            };
+        }
         ////////////////////////////////
         // MUSIC PLAYER SETTINGS
         ////////////////////////////////
 
-        // Replace existing input box with new one
-        $('input[name="custom-playlist"]').replaceWith(
-            $("<input>").attr({
-                type: "text",
-                placeholder: "Paste spotify playlist URL here",
-                class: "form-control mb-3",
-                id: "playlistURL",
-            })
-        );
+        if(getConfigOptions().option4) {
 
-        // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
-        $(".btn.btn-primary.align-self-start.custom-save")
-            .removeAttr("disabled")
-            .attr("id", "playlistUpdate");
+            // Replace existing input box with new one
+            $('input[name="custom-playlist"]').replaceWith(
+                $("<input>").attr({
+                    type: "text",
+                    placeholder: "Paste spotify playlist URL here",
+                    class: "form-control mb-3",
+                    id: "playlistURL",
+                })
+            );
 
-        $("#playlistUpdate").click(function () {
-            var inputValue = $("#playlistURL").val();
-            var id = getPlaylistID(inputValue);
-            $(".music-player.spotify").attr(
-                "src",
-                `https://open.spotify.com/embed/playlist/${id}?theme=0&amp;utm_source=iframe-api`
+            // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
+            $(".btn.btn-primary.align-self-start.custom-save")
+                .removeAttr("disabled")
+                .attr("id", "playlistUpdate");
+
+            $("#playlistUpdate").click(function () {
+                var inputValue = $("#playlistURL").val();
+                var id = getPlaylistID(inputValue);
+                $(".music-player.spotify").attr(
+                    "src",
+                    `https://open.spotify.com/embed/playlist/${id}?theme=0&amp;utm_source=iframe-api`
       );
         });
 
-        // Remove custom music section from secondary source
-        $("#settModal-music").find(".mb-6").remove();
+            // Remove custom music section from secondary source
+            $("#settModal-music").find(".mb-6").remove();
+        }
 
         ////////////////////////////////
         // SETTINGS TAB
@@ -209,12 +237,66 @@
         $(".flocus-tweaks-settings").html(
             '<div class="row"><div class="col-12"><h3 class="mb-4">Flocus Tweaks</h3></div></div>'
         );
+
         // Load content of the changelog.html file into the Flocus Tweaks tab
         $(".flocus-tweaks-settings").load("https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/changelog.html", function() {
-            console.log($(".tweaks-version.version"))
             $(".tweaks-version.version").text(`v${scriptVersion}`);
+            updateChecks(configItems)
+            configItems.forEach(item => {
+                const checkbox = $("#ft-" + item);
+                checkbox.on('change', function() {
+                    updateConfigValues(configItems)
+                    console.log(GM_getValue(item))
+                })
+            })
             console.log(GM_info.script.version)
         });
+
+        configSetup();
+
+        // Config setup
+
+        function checkAndCreate(items) {
+            function check(item) {
+                return GM_getValue(item) !== undefined;
+            }
+
+            function create(item) {
+                GM_setValue(item, true);
+            }
+
+            items.forEach(item => {
+                if (!check(item)) {
+                    create(item);
+                    console.log(`Created ${item} in Tampermonkey local storage.`);
+                } else {
+                    console.log(`${item} already exists in Tampermonkey local storage.`);
+                }
+            });
+        };
+
+        function updateChecks(items) {
+            items.forEach(item => {
+                const checkbox = $("#ft-" + item);
+                const storedValue = GM_getValue(item);
+                checkbox.prop('checked', storedValue);
+            });
+        }
+
+        function updateConfigValues(items) {
+            items.forEach(item => {
+                const checkbox = $("#ft-" + item);
+                const storedValue = GM_getValue(item);
+                GM_setValue(item, checkbox.prop('checked'));
+            });
+        }
+
+        function configSetup() {
+            checkAndCreate(configItems);
+            console.log("setup")
+        };
+
+
 
 
         // Change display name without full account change
