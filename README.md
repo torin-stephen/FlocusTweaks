@@ -52,8 +52,3 @@ The script provides configuration options for different features. You can modify
 
 - Some features may require additional setup or permissions.
 - Make sure to update the script version whenever there are new releases or updates.
-
-## Author
-
-This Tampermonkey script was authored by TKMSMC.
-
