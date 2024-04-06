@@ -21,6 +21,10 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 - Allows users to paste Spotify playlist URLs to update the embedded music player.
 - Fixes visual quirks of the Music Player.
 
+### 5. Focus Timer
+- Allows users to time up instead of down on the focus dash.
+- Not fully implemented.
+
 ### 5. Settings Tab
 - Replaces the support tab with a custom settings tab for Flocus Tweaks.
 - Loads the changelog from github repository.
@@ -47,6 +51,7 @@ The script provides configuration options for different features. You can modify
 - `option2`: Remove ads for Plus subscriptions across the site.
 - `option3`: Adds plus features to the priorities menu in the focus mode.
 - `option4`: Adds plus features to the music tab, allowing custom playlists.
+- `option5`: Adds a timer to the focus dash.
 
 ## Note
 
