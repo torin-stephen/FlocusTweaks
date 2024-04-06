@@ -36,7 +36,7 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 3. Select "Dashboard" from the drop down menu.
 4. Drag the [Flocus Tweaks](https://github.com/torin-stephen/FlocusTweaks/releases/latest) file into the list.
 5. Select "install".
-6. Refresh the Flocus website (https://app.flocus.com/) to apply the tweaks.
+6. Refresh the [Flocus website](https://app.flocus.com/) to apply the tweaks.
 5. The script will automatically enhance your Flocus experience according to the configured settings.
 
 ## Configuration
