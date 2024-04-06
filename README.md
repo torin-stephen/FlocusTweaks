@@ -34,7 +34,7 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 1. Install the Tampermonkey extension for your browser (available for Chrome, Firefox, Edge, and Safari).
 2. Click on the Tampermonkey icon in your browser toolbar.
 3. Select "Dashboard" from the drop down menu.
-4. Drag the Flocus Tweaks file into the list.
+4. Drag the [Flocus Tweaks](https://github.com/torin-stephen/FlocusTweaks/releases/latest) file into the list.
 5. Select "install".
 6. Refresh the Flocus website (https://app.flocus.com/) to apply the tweaks.
 5. The script will automatically enhance your Flocus experience according to the configured settings.
