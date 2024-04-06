@@ -5,7 +5,6 @@
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.js
-// @require      https://kit.fontawesome.com/f2cd1a0920.js
 // @resource     REMOTE_CSS https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.css
 // @author       TKMSMC
 // @match        https://app.flocus.com/
@@ -55,7 +54,7 @@
         position: "top-right", // top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
     });
 
-    // Add toast and fa css to the page
+    // Add toast css to the page
     const toastCss = GM_getResourceText("REMOTE_CSS");
     GM_addStyle(toastCss);
 
