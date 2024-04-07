@@ -3,8 +3,12 @@ import sys
 def generate_html(input_text):
     sections = input_text.split('\n\n')
 
-    # Parse settings section
-    settings_section = sections[sections.index('Settings:') + 1]
+    try:
+        settings_section = sections[sections.index('Settings:') + 1]
+    except ValueError:
+        print("Error: 'Settings:' section not found in input text.")
+        return ""
+
     settings_lines = settings_section.split('\n')
     settings_html = '<h4>Settings</h4>\n<div class="row">\n'
     for line in settings_lines:
@@ -30,6 +34,10 @@ def generate_html(input_text):
     return html_output
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python generate_html.py <input_text>")
+        sys.exit(1)
+    
     input_text = sys.argv[1]
     html_output = generate_html(input_text)
     print(html_output)
