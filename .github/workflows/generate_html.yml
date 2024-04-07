@@ -22,7 +22,7 @@ jobs:
     - name: Generate HTML
       id: generate-html
       run: |
-        python .github/workflows/generate_html.py "${{ steps.read-file.outputs.file_content }}"
+        python generate_html.py "${{ steps.read-file.outputs.file_content }}"
 
     - name: Save HTML output
       run: |
