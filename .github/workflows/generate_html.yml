@@ -25,8 +25,8 @@ jobs:
         python generate_html.py "${{ steps.read-file.outputs.file_content }}"
 
     - name: Save HTML output
-      run: |
-        echo "${{ steps.generate-html.outputs.html }}" > generated_output.html
+      run:
+        echo "${{ steps.generate-html.outputs.html }}" > $GITHUB_WORKSPACE/generated_output.html
         cp generated_output.html $GITHUB_WORKSPACE/generated_output.html
       shell: bash
 
