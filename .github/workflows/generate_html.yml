@@ -1,37 +1,33 @@
-name: Generate HTML from Changelog
+name: Generate HTML from Input File
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  generate_html:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Read input file
-      id: read-file
-      run: |
-        wget -O input_file.txt https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/settings
-        echo "::set-output name=file_content::$(cat input_file.txt)"
+      - name: Fetch input file
+        run: |
+          curl -o input.txt https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/settings
 
-    - name: Generate HTML
-      id: generate-html
-      run: |
-        python generate_html.py "${{ steps.read-file.outputs.file_content }}"
-
-    - name: Save HTML output
-      run:
-        echo "${{ steps.generate-html.outputs.html }}" > $GITHUB_WORKSPACE/generated_output.html
-        cp generated_output.html $GITHUB_WORKSPACE/generated_output.html
-      shell: bash
-
-    - name: Upload HTML output
-      uses: actions/upload-artifact@v2
-      with:
-        name: generated-output
-        path: $GITHUB_WORKSPACE/generated_output.html
+      - name: Generate HTML
+        run: |
+          echo "<h3>Flocus Tweaks</h3>" > output.html
+          echo "<div class=\"row\">" >> output.html
+          awk '/Settings:/,/Changelog:/{if ($0 ~ /^Settings:/) next; if ($0 ~ /^Changelog:/) {print "<hr>"} else {print "<div class=\"mb-4 col-12\">"; print "<div class=\"form-check form-switch\">"; print "<input class=\"form-check-input\" type=\"checkbox\" id=\"ft-option"++i"\">"; print "<label class=\"form-check-label\" for=\"showNotification\">"; print $1; print "<div class=\"text-secondary\">"; $1=""; print $0"</div>"; print "</label>"; print "</div>"; print "</div>"}}' input.txt >> output.html
+          echo "<hr>" >> output.html
+          echo "<div class=\"mb-4 col-12\">" >> output.html
+          echo "<h4>Changelog</h4>" >> output.html
+          echo "<ol>" >> output.html
+          awk '/Changelog:/{f=1; next} f && /^Other title:/{exit} f' input.txt | awk 'NR > 1 {print $0}' | sed -e 's/^[0-9]*\. /<li>/g' -e 's/^/<li><strong>/g' -e 's/$/<\/strong><\/li>/g' -e '1s/^/<li><strong>/g' -e 's/$/<\/li>/g' >> output.html
+          echo "</ol>" >> output.html
+          echo "</div>" >> output.html
+          echo "<hr>" >> output.html
+          echo "<span class=\"tweaks-version version\"></span>" >> output.html
