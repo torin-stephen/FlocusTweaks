@@ -1,0 +1,28 @@
+name: Generate HTML from Changelog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Read input file
+      id: read-file
+      run: |
+        wget -O input_file.txt https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/settings
+        echo "::set-output name=file_content::$(cat input_file.txt)"
+
+    - name: Generate HTML
+      id: generate-html
+      run: |
+        python generate_html.py "${{ steps.read-file.outputs.file_content }}"
+
+    - name: Save HTML output
+      run: echo "${{ steps.generate-html.outputs.html }}" > generated_output.html
