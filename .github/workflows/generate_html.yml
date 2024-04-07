@@ -22,7 +22,16 @@ jobs:
     - name: Generate HTML
       id: generate-html
       run: |
-        python generate_html.py "${{ steps.read-file.outputs.file_content }}"
+        python .github/workflows/generate_html.py "${{ steps.read-file.outputs.file_content }}"
 
     - name: Save HTML output
-      run: echo "${{ steps.generate-html.outputs.html }}" > generated_output.html
+      run: |
+        echo "${{ steps.generate-html.outputs.html }}" > generated_output.html
+        cp generated_output.html $GITHUB_WORKSPACE/generated_output.html
+      shell: bash
+
+    - name: Upload HTML output
+      uses: actions/upload-artifact@v2
+      with:
+        name: generated-output
+        path: $GITHUB_WORKSPACE/generated_output.html
