@@ -31,3 +31,8 @@ jobs:
           echo "</div>" >> output.html
           echo "<hr>" >> output.html
           echo "<span class=\"tweaks-version version\"></span>" >> output.html
+
+      - name: Save HTML output
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/public
+          mv output.html $GITHUB_WORKSPACE/public/
