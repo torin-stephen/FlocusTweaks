@@ -10,7 +10,13 @@ settings_content = response.text
 settings_lines = settings_content.split("\n")
 
 # Extracting content after "Changelog"
-changelog_index = settings_lines.index("Changelog:") + 1
+for index, line in enumerate(settings_lines):
+    if line.startswith("Changelog:"):
+        changelog_index = index + 1
+        break
+else:
+    raise ValueError("Changelog not found in settings")
+
 changelog_content = "\n".join(settings_lines[changelog_index:])
 
 # Fetching content from the HTML file URL
