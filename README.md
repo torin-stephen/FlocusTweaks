@@ -58,6 +58,13 @@ The script provides configuration options for different features. You can modify
 - `option5`: Adds a timer to the focus dash.
 - `option6`: Adds ability to change display name in profile settings.
 
+## Images
+
+![image 1](https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/assets/sc1.png)
+![image 2](https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/assets/sc2.png)
+![image 3](https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/assets/sc3.png)
+![iamge 4](https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/assets/sc4.png)
+
 ## Note
 
 - Some features may require additional setup or permissions.
