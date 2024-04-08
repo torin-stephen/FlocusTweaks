@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    https://github.com/torin-stephen/FlocusTweaks
-// @version      1.6.5
+// @version      1.6.6
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.js
@@ -22,11 +22,11 @@
     "use strict";
     var $ = window.jQuery;
     var scriptVersion = GM_info.script.version;
-    const configItems = ["option1", "option2", "option3", "option4", "option5"];
+    const configItems = ["option1", "option2", "option3", "option4", "option5", "option6"];
 
     function getConfigOptions() {
         const storedValues = {};
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 6; i++) {
             const itemName = "option" + i;
             const storedValue = GM_getValue(itemName, true); // Default value is true if not found
             storedValues[itemName] = storedValue;
@@ -69,6 +69,16 @@
             style: "dark",
             dismissAfter: "2.5s",
         });
+
+        //Setup display name
+        if (getConfigOptions().option6) {
+            $(".greeting").ready(function() {
+                if(GM_getValue("displayname") != undefined){
+                    updateDisplayName(GM_getValue("displayname"))
+                }
+            });
+        };
+
 
         ////////////////////////////////
         // VISUAL SETTINGS
@@ -367,7 +377,7 @@
 
                     $(".timer-start").hide()
                     $(".btn.pomodoro-start").show()
-                        // Stop and reset the timer
+                    // Stop and reset the timer
                     clearInterval(timerInterval);
                     timerRunning = false;
                     elapsedTime = 0;
@@ -392,7 +402,7 @@
                     var bposition = $(".btn.pomodoro-start").position();
                     var rposition = $(".pomodoro-stop").position();
                     $(".btn.pomodoro-start").hide()
-                        //$(".pomodoro-stop").hide()
+                    //$(".pomodoro-stop").hide()
 
                     $(".btn.pomodoro-start").parent().prepend(`
     <button class="btn timer-start">
@@ -482,7 +492,27 @@
                 );
             }
         }
-        // Change display name without full account change
+
+        if (getConfigOptions().option6) {
+            // Display Name change without full account name change
+            $("#settModal-profile").append(`<div class="mb-4"> <label for="displayName" class="form-label">Display Name</label> <div class="row row-cols-lg-auto g-0"> <input style="width:calc(100% - 130px);" type="text" name="custom-displayName" id="custom-displayName" placeholder="Set your display name here" class="form-control me-4" autocomplete="off"> <button type="button" class="btn btn-primary" id="setDisplayName">Save</button> </div> </div>`)
+            $(document).on("click", "#setDisplayName", function() {
+                var input = $("#custom-displayName").val();
+                updateDisplayName(input)
+            });
+        }
+        function updateDisplayName(newName) {
+            var nameToChange = GM_getValue("displayname") || localStorage.getItem("flocus-name")
+            $(".account-name").html(newName);
+            $(".greeting").text(function (index, text) {
+                // Replace occurrences of the original name and nameToChange with the new name
+                var modifiedText = text
+                .replace(new RegExp(localStorage.getItem("flocus-name"), "g"), newName)
+                .replace(new RegExp(nameToChange, "g"), newName);
+                return modifiedText;
+            });
+            GM_setValue("displayname", newName);
+        };
 
         // Themes inputs not currently implemented
         /*
@@ -494,6 +524,9 @@
                 id: "backgroundURL",
             })
         );
+
+        // Display name HTML, put in to profile tab
+        <div class="mb-4"> <label for="displayName" class="form-label">Display Name</label> <div class="row row-cols-lg-auto g-0"> <input style="width:calc(100% - 130px);" type="text" name="custom-displayName" placeholder="Set your display name here" class="form-control me-4"> <button type="button" class="btn btn-primary">Save</button> </div> </div>
         */
 
 
