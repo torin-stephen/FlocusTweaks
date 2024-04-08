@@ -23,7 +23,7 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 
 ### 5. Focus Timer
 - Allows users to time up instead of down on the focus dash.
-- Not fully implemented.
+- Small tweaks to be made to visual, removal of small bugs also.
 
 ### 5. Settings Tab
 - Replaces the support tab with a custom settings tab for Flocus Tweaks.
