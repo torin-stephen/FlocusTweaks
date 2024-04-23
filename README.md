@@ -22,6 +22,7 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 - Fixes visual quirks of the Music Player.
 
 ### 5. Focus Timer
+- Broken in latest patch.
 - Allows users to time up instead of down on the focus dash.
 - Small tweaks to be made to visual, removal of small bugs also.
 
@@ -55,7 +56,7 @@ The script provides configuration options for different features. You can modify
 - `option2`: Remove ads for Plus subscriptions across the site.
 - `option3`: Adds plus features to the priorities menu in the focus mode.
 - `option4`: Adds plus features to the music tab, allowing custom playlists.
-- `option5`: Adds a timer to the focus dash.
+- `option5`: Adds a timer to the focus dash. (Broken in latest patch.)
 - `option6`: Adds ability to change display name in profile settings.
 
 ## Images

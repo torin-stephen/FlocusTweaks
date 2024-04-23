@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    https://github.com/torin-stephen/FlocusTweaks
-// @version      1.6.6
+// @version      1.6.7
 // @description  Take over the world!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @require      https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/toast/toast.js
@@ -23,6 +23,8 @@
     var $ = window.jQuery;
     var scriptVersion = GM_info.script.version;
     const configItems = ["option1", "option2", "option3", "option4", "option5", "option6"];
+    // Timer Currently Not Working - Disabled here -- REMOVE WHEN FIXED --
+    GM_setValue("option5", false)
 
     function getConfigOptions() {
         const storedValues = {};
