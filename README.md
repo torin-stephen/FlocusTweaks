@@ -1,4 +1,5 @@
-![image 0](https://github.com/torin-stephen/FlocusTweaks/blob/main/logo-inverted.png | width=100)
+![image 0](https://github.com/torin-stephen/FlocusTweaks/blob/main/logo-inverted.png)
+<img src="https://github.com/torin-stephen/FlocusTweaks/blob/main/logo-inverted.png" width=100 />
 # Flocus Tweaks
 
 This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the functionality and visual experience of the Flocus web application. Below is a breakdown of the script features and how to use them.
