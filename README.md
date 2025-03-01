@@ -5,29 +5,22 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 
 ## Features
 
-### 1. Toast Notifications
-- Displays toast notifications for various actions within Flocus.
-- Settings for toast notifications are configurable.
-
-### 2. Visual Enhancements
+### 1. Visual Enhancements
 - Replaces the Flocus logo
 - Fixes visual quirks within the Flocus interface.
 - Removes ads for the "plus" version.
 
-### 3. Priorities Plus
+### 2. Priorities Plus
 - Adds emoji functionality to priority tasks.
 - Adds color picker option for each task.
 
-### 4. Music Plus
+### 3. Music Plus
 - Allows users to paste Spotify playlist URLs to update the embedded music player.
 - Fixes visual quirks of the Music Player.
 
-### 5. Custom Display Name
-- Allows users to change their display name in the profile tab.
-- Doesn't require change of account details of Gridfiti
-
-### 6. Settings Tab
+### 7. Settings Tab
 - Replaces the support tab with a custom settings tab for Flocus Tweaks.
+- Removes unnecessary tabs
 - Loads the changelog from github repository.
 
 ### 7. Configuration
@@ -52,7 +45,6 @@ The script provides configuration options for different features. You can modify
 - `option2`: Remove ads for Plus subscriptions across the site.
 - `option3`: Adds plus features to the priorities menu in the focus mode.
 - `option4`: Adds plus features to the music tab, allowing custom playlists.
-- `option5`: Adds ability to change display name in profile settings.
 
 ## Images
 
