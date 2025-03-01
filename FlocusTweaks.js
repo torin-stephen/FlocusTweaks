@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    https://github.com/torin-stephen/FlocusTweaks
-// @version      1.6.8
-// @description  Take over the world!
+// @version      1.6.9
+// @description  Tweak that flocus!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @author       TKMSMC
 // @match        https://app.flocus.com/
@@ -16,7 +16,7 @@
 // Font Jura
 // Color #222 #8D8
 // Toast settings: https://codeshack.io/elegant-toast-notifications-javascript/
-(function() {
+(function () {
     "use strict";
     var $ = window.jQuery;
     var scriptVersion = GM_info.script.version;
@@ -39,11 +39,11 @@
         return id;
     };
 
-    $(window).load(function() {
+    $(window).load(function () {
         //Setup display name
         if (getConfigOptions().option6) {
-            $(".greeting").ready(function() {
-                if(GM_getValue("displayname") != undefined){
+            $(".greeting").ready(function () {
+                if (GM_getValue("displayname") != undefined) {
                     updateDisplayName(GM_getValue("displayname"))
                 }
             });
@@ -68,21 +68,21 @@
             // Remove ads for plus
             $("plus-badge").remove();
             $(".upgrade-button").remove();
-            $(".dash-mode").click(function() {
+            $(".dash-mode").click(function () {
                 $("div.flocus-free-only").attr("class", "flocus-plus-only");
             });
         }
 
         if (getConfigOptions().option3) {
             // When the dash is changed, remove ads for plus, add emoji
-            $(".dash-mode").click(function() {
+            $(".dash-mode").click(function () {
                 $("div.flocus-free-only").attr("class", "flocus-plus-only");
                 prioritiesEmoji();
             });
 
             // Creating a MutationObserver instance
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
+            var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
                     // Checking if the class of the body has changed
                     if ($(mutation.target).hasClass("modal-open")) {
                         // If class changed to "modal-open", run prioritiesEmoji function
@@ -145,7 +145,7 @@
                     );
 
                     // Find the object with the same name as the text of the span
-                    var matchingObject = $.grep(localStorageData, function(obj) {
+                    var matchingObject = $.grep(localStorageData, function (obj) {
                         return obj.name === spanText;
                     })[0];
 
@@ -178,12 +178,44 @@
                 })
             );
 
+            // Remove Load Spotify Player Button
+            // Check if the button with class 'load-spotify' exists
+            if ($('.load-spotify').length) {
+
+                // Replace the button with a new button
+                $('.load-spotify').replaceWith(
+                    $('<button/>', {
+                        class: 'btn btn-primary align-self-start btn-sm mb-5 load-spotify-tweaked',
+                        text: 'Load Spotify Playlist'
+                    })
+                );
+
+                $('.load-spotify-tweaked').on('click', function () {
+                    // Create the iframe element for the Spotify embed
+                    const iframe = $('<iframe>', {
+                        frameborder: '0',
+                        allowfullscreen: '',
+                        allow: 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture',
+                        loading: 'lazy',
+                        width: '310',
+                        height: '400',
+                        src: 'https://open.spotify.com/embed/playlist/0z0aNrtMCDHsVuLjyz1goV?theme=0&utm_source=iframe-api',
+                        class: 'music-player spotify'
+                    });
+                    $(this).parent().append(iframe);
+                    $('.offcanvas-body.d-flex.flex-column.justify-content-center .mb-5').eq(1).remove();
+                    $(this).hide()
+
+                });
+
+            }
+
             // Remove disabled attribute from button with class "btn btn-primary align-self-start custom-save"
             $(".btn.btn-primary.align-self-start.custom-save")
                 .removeAttr("disabled")
                 .attr("id", "playlistUpdate");
 
-            $("#playlistUpdate").click(function() {
+            $("#playlistUpdate").click(function () {
                 var inputValue = $("#playlistURL").val();
                 var id = getPlaylistID(inputValue);
                 $(".music-player.spotify").attr(
@@ -215,12 +247,12 @@
         // Load content of the settings.html file into the Flocus Tweaks tab
         $(".flocus-tweaks-settings").load(
             "https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/settings.html",
-            function() {
+            function () {
                 $(".tweaks-version.version").text(`v${scriptVersion}`);
                 updateChecks(configItems);
                 configItems.forEach((item) => {
                     const checkbox = $("#ft-" + item);
-                    checkbox.on("change", function() {
+                    checkbox.on("change", function () {
                         updateConfigValues(configItems);
                         console.log(GM_getValue(item));
                     });
@@ -231,24 +263,24 @@
         // Background Button
         $(".flocus-tweaks-settings").append(
             $("<button>")
-            .attr({
-                type: "button",
-                class: "btn btn-primary align-self-start custom-save",
-                id: "backgroundUpdate",
-                disabled: true
-            })
-            .html("Change Background")
+                .attr({
+                    type: "button",
+                    class: "btn btn-primary align-self-start custom-save",
+                    id: "backgroundUpdate",
+                    disabled: true
+                })
+                .html("Change Background")
         );
         // Name change
         $(".flocus-tweaks-settings").append(
             $("<button>")
-            .attr({
-                type: "button",
-                class: "btn btn-primary align-self-start custom-save",
-                id: "nameUpdate",
-                disabled: true
-            })
-            .html("Change Name")
+                .attr({
+                    type: "button",
+                    class: "btn btn-primary align-self-start custom-save",
+                    id: "nameUpdate",
+                    disabled: true
+                })
+                .html("Change Name")
         );
 
         configSetup();
@@ -297,7 +329,7 @@
         if (getConfigOptions().option5) {
             // Display Name change without full account name change
             $("#settModal-profile").append(`<div class="mb-4"> <label for="displayName" class="form-label">Display Name</label> <div class="row row-cols-lg-auto g-0"> <input style="width:calc(100% - 130px);" type="text" name="custom-displayName" id="custom-displayName" placeholder="Set your display name here" class="form-control me-4" autocomplete="off"> <button type="button" class="btn btn-primary" id="setDisplayName">Save</button> </div> </div>`)
-            $(document).on("click", "#setDisplayName", function() {
+            $(document).on("click", "#setDisplayName", function () {
                 var input = $("#custom-displayName").val();
                 updateDisplayName(input)
             });
@@ -308,8 +340,8 @@
             $(".greeting").text(function (index, text) {
                 // Replace occurrences of the original name and nameToChange with the new name
                 var modifiedText = text
-                .replace(new RegExp(localStorage.getItem("flocus-name"), "g"), newName)
-                .replace(new RegExp(nameToChange, "g"), newName);
+                    .replace(new RegExp(localStorage.getItem("flocus-name"), "g"), newName)
+                    .replace(new RegExp(nameToChange, "g"), newName);
                 return modifiedText;
             });
             GM_setValue("displayname", newName);
