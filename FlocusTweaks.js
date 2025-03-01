@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    https://github.com/torin-stephen/FlocusTweaks
-// @version      1.6.9
+// @version      1.7.1
 // @description  Tweak that flocus!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @author       TKMSMC
@@ -56,10 +56,16 @@
 
         if (getConfigOptions().option1) {
             // Replace logo with better one
-            $(".logo").attr(
-                "src",
-                "https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/logo.png"
-            );
+            $('#top-left').empty()
+            $('#top-left').append(
+                $('<img>', {
+                    width: '150',
+                    height: 'auto',
+                    src: 'https://raw.githubusercontent.com/torin-stephen/FlocusTweaks/main/logo.png',
+                    class: 'logo',
+                    id: 'tweaked-logo'
+                })
+            )
         }
         // Fix the strange visual choices
         $(".offcanvas-content").removeClass();
