@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Flocus Tweaks
 // @namespace    https://github.com/torin-stephen/FlocusTweaks
-// @version      1.7.1
+// @version      1.7.2
 // @description  Tweak that flocus!
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @author       TKMSMC
@@ -20,7 +20,7 @@
     "use strict";
     var $ = window.jQuery;
     var scriptVersion = GM_info.script.version;
-    const configItems = ["option1", "option2", "option3", "option4", "option5"];
+    const configItems = ["option1", "option2", "option3", "option4"];
 
     function getConfigOptions() {
         const storedValues = {};
@@ -40,15 +40,6 @@
     };
 
     $(window).load(function () {
-        //Setup display name
-        if (getConfigOptions().option6) {
-            $(".greeting").ready(function () {
-                if (GM_getValue("displayname") != undefined) {
-                    updateDisplayName(GM_getValue("displayname"))
-                }
-            });
-        };
-
 
         ////////////////////////////////
         // VISUAL SETTINGS
@@ -77,6 +68,8 @@
             $(".dash-mode").click(function () {
                 $("div.flocus-free-only").attr("class", "flocus-plus-only");
             });
+            $('share-button').remove();
+            $('.share-button').remove();
         }
 
         if (getConfigOptions().option3) {
@@ -93,7 +86,6 @@
                     if ($(mutation.target).hasClass("modal-open")) {
                         // If class changed to "modal-open", run prioritiesEmoji function
                         prioritiesEmoji();
-                        console.log("mutated");
                     }
                 });
             });
@@ -157,15 +149,8 @@
 
                     if (matchingObject) {
                         // Output the emoji
-                        console.log("Emoji for " + spanText + ": " + matchingObject.emoji);
                         $("div.task span.emoji").html(matchingObject.emoji);
-                    } else {
-                        console.log("No matching object found for " + spanText);
                     }
-                } else {
-                    console.log(
-                        "No span element with class 'title' found within a div with class 'task'"
-                    );
                 }
             };
         }
@@ -232,7 +217,59 @@
 
             // Remove custom music section from secondary source
             $("#settModal-music").find(".mb-6").remove();
+
+            // Remove flocus playlists from settings tab
+            $('#settModal-music .row .mb-4').remove();
         }
+
+        // Sounds functioner
+        // Iterate over each div with class 'sound'
+        $('div.sound').each(function() {
+            const $soundDiv = $(this);
+            const soundName = $soundDiv.attr('data-sound');
+
+            // 1. Rename data attribute
+            $soundDiv.attr('data-sound-tweaked', soundName).removeAttr('data-sound');
+
+            // 2. Remove Plus spans
+            $soundDiv.find('span[data-tag="Plus"]').remove();
+            $('.sounds-header').find('.play-button').remove();
+            $('.sounds-header').find('.reset-button').remove();
+
+            // 3. Audio setup
+            const audio = new Audio(
+                `https://github.com/torin-stephen/FlocusTweaks/raw/refs/heads/main/assets/sounds/${soundName}.mp3`
+            );
+
+            // 4. Volume control setup
+            const $volumeInput = $soundDiv.find('input[type="range"]');
+
+            // Set initial volume to 50% (0.5)
+            audio.volume = 0.5;
+            $volumeInput.val(0.5); // Set the slider to 0.5
+
+            // Update volume when input changes
+            $volumeInput.on('input', function() {
+                const volumeValue = parseFloat($(this).val()); // Get the value as a float
+                audio.volume = volumeValue; // Set the audio volume directly
+            });
+
+            // 5. Button click handler to toggle audio
+            const $button = $soundDiv.find('button');
+            $button.on('click', function() {
+                if ($soundDiv.attr('data-active') === 'true') {
+                    // If audio is active, stop it and revert tags
+                    audio.pause();
+                    audio.currentTime = 0; // Reset audio to start
+                    $soundDiv.attr('data-active', 'false');
+                } else {
+                    // If audio is not active, start it
+                    $soundDiv.attr('data-active', 'true');
+                    $soundDiv.attr('data-sound-tweaked', soundName).removeAttr('data-sound'); // Set tweaked attribute
+                    audio.play();
+                }
+            });
+        });
 
         ////////////////////////////////
         // SETTINGS TAB
@@ -266,28 +303,10 @@
             }
         );
 
-        // Background Button
-        $(".flocus-tweaks-settings").append(
-            $("<button>")
-                .attr({
-                    type: "button",
-                    class: "btn btn-primary align-self-start custom-save",
-                    id: "backgroundUpdate",
-                    disabled: true
-                })
-                .html("Change Background")
-        );
-        // Name change
-        $(".flocus-tweaks-settings").append(
-            $("<button>")
-                .attr({
-                    type: "button",
-                    class: "btn btn-primary align-self-start custom-save",
-                    id: "nameUpdate",
-                    disabled: true
-                })
-                .html("Change Name")
-        );
+        $('#settModal-sounds-tab').remove();
+        $('#settModal-music .mb-5').remove();
+        $('#settModal-extras .row .form-check').eq(2).remove();
+
 
         configSetup();
 
@@ -331,27 +350,6 @@
         function configSetup() {
             checkAndCreate(configItems);
         }
-
-        if (getConfigOptions().option5) {
-            // Display Name change without full account name change
-            $("#settModal-profile").append(`<div class="mb-4"> <label for="displayName" class="form-label">Display Name</label> <div class="row row-cols-lg-auto g-0"> <input style="width:calc(100% - 130px);" type="text" name="custom-displayName" id="custom-displayName" placeholder="Set your display name here" class="form-control me-4" autocomplete="off"> <button type="button" class="btn btn-primary" id="setDisplayName">Save</button> </div> </div>`)
-            $(document).on("click", "#setDisplayName", function () {
-                var input = $("#custom-displayName").val();
-                updateDisplayName(input)
-            });
-        }
-        function updateDisplayName(newName) {
-            var nameToChange = GM_getValue("displayname") || localStorage.getItem("flocus-name")
-            $(".account-name").html(newName);
-            $(".greeting").text(function (index, text) {
-                // Replace occurrences of the original name and nameToChange with the new name
-                var modifiedText = text
-                    .replace(new RegExp(localStorage.getItem("flocus-name"), "g"), newName)
-                    .replace(new RegExp(nameToChange, "g"), newName);
-                return modifiedText;
-            });
-            GM_setValue("displayname", newName);
-        };
 
         // Welcome message
         console.log(`%cFlocus Tweaks v${scriptVersion} 🚀`, 'color:#0dd8d8; background:#0b1021; font-size:1.5rem; padding:0.15rem 0.25rem; margin: 1rem auto; font-family: Rockwell; border: 2px solid #0dd8d8; border-radius: 4px;font-weight: bold; text-shadow: 1px 1px 1px #00af87bf;');
