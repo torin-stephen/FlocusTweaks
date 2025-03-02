@@ -17,6 +17,7 @@ This Tampermonkey script, named "Flocus Tweaks", is designed to enhance the func
 ### 3. Music Plus
 - Allows users to paste Spotify playlist URLs to update the embedded music player.
 - Fixes visual quirks of the Music Player.
+- SoundsPlus enabled for everyone
 
 ### 4. Settings Tab
 - Replaces the support tab with a custom settings tab for Flocus Tweaks.
